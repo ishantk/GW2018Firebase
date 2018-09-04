@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "309167294096",
+    "firebase_url": "https://gw2018-526ef.firebaseio.com",
+    "project_id": "gw2018-526ef",
+    "storage_bucket": "gw2018-526ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309167294096:android:98559ae08085f5cb",
+        "android_client_info": {
+          "package_name": "com.auribises.gw2018firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309167294096-rv04bo7leg12ujs72t8fd02sfa8curul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv1Df9yEQ8N6dssZjSLzI8TzKLr83uQ8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

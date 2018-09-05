@@ -21,6 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +45,8 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    ArrayList<User> users;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
         ButterKnife.bind(this);
         user = new User();
+
+        users = new ArrayList<>();
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -107,11 +115,47 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    void deleteUserFromFirestore(){
+        db.collection("users").document(fbUser.getUid()).delete();
+        //db.collection("users").document(fbUser.getUid()).delete().addOnCompleteListener()
+    }
+
+    void updateUserInFirestore(){
+        db.collection("users").document(fbUser.getUid()).set(user);
+    }
+
+    void retrieveFromFirestore(){
+
+        // Retrieve all the documents in collection users
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(this, new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(task.isComplete()){
+
+                            for(QueryDocumentSnapshot snapshot : task.getResult()){
+                                User u = snapshot.toObject(User.class);
+                                Log.d("USER",u.toString());
+                                users.add(u);
+                            }
+
+                            // Create a custom RecyclerView or ListView or GridView
+                        }
+                    }
+                });
+
+        // Retrieve Single Document
+        //DocumentReference docRef = db.collection("users").document(fbUser.getUid());
+        //User u1 = docRef.get().getResult().toObject(User.class);
 
 
 
     }
+
 
     void signInUser(){
         progressDialog.show();
